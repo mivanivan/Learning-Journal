@@ -1,0 +1,8 @@
+nama = input ("Masukkan nama Anda : ")
+usia = input ("Masukkan usia Anda : ")
+print(f"Nama kamu adalah : {nama} dan usia kamu adalah : {usia}")
+angka_1 = input ("Masukan Angka Pertama : ")
+angka_1 = eval(angka_1)
+angka_2 = input ("Masukan Angka Kedua : ")
+angka_2 = eval(angka_2)
+print(f"Hasil Perhitungan = {angka_1 + angka_2}")
