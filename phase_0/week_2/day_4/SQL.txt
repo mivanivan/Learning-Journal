@@ -1,0 +1,113 @@
+-- Membuat Table Teachers
+CREATE TABLE teachers (
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, -- Not null artinya tidak boleh 0, keberadaan AUTO_INCREMENT adalah apabila ada baru masuk langsung di index automatis
+    first_name varchar(25) NOT NULL, -- Varchar artinya string
+    last_name varchar(50),
+    school varchar(50) NOT NULL,
+    hire_date date,
+    salary numeric
+    );
+    
+    -- Menambah column age
+    ALTER TABLE teachers ADD age INT;
+    
+    -- Menghapus column age
+    Alter Table teachers DROP COLUMN age
+    
+    -- Mengganti tipe data column salary
+    ALTER TABLE teachers MODIFY COLUMN salary INT;
+    
+    -- Mengubah nama table teacher menjadi guru
+    ALTER TABLE teachers RENAME TO guru;
+    
+    -- Mengubah nama table guru menjadi teachers
+    ALTER TABLE guru RENAME TO teachers;
+    
+    -- Mengisi data ke table teachers
+    INSERT INTO teachers (id,first_name, last_name, school, hire_date, salary)
+    VALUES (1,'Janet', 'Smith', 'MIT', '2011-10-30', 36200),
+           (2,'Lee', 'Reynolds', 'MIT', '1993-05-22', 65000),
+           (3,'Samuel', 'Cole', 'Cambridge University', '2005-08-01', 43500),
+           (4,'Samantha', 'Bush', 'Cambridge University', '2011-10-30', 36200),
+           (5,'Betty', 'Diaz', 'Cambridge University', '2005-08-30', 43500),
+           (6,'Kathleen', 'Roush', 'MIT', '2010-10-22', 38500),
+           (7,'James', 'Diaz', 'Harvard University', '2003-07-18', 61000),
+           (8,'Zack', 'Smith', 'Harvard University', '2000-12-29', 55500),
+           (9,'Luis', 'Gonzales', 'Standford University', '2002-12-01', 50000),
+           (10,'Frank', 'Abbers', 'Standford University', '1999-01-30', 66000);
+    
+    -- Melihat isi dari table teachers
+    select * FROM teachers; -- bintang maksudnya seperti all
+    
+    -- Menghapus emua isi dari table teachers
+    Truncate TABLE teachers;
+    SELECT * FROM teachers;
+    
+    -- Mengubah salary dari id=3
+    UPDATE teachers
+    SET salary=50000 -- kalau kode berhenti disini semua tabel gaji berubah 50000
+    WHERE id=3;
+    
+    -- Menghapus data dengan id=6
+    DELETE FROM teachers
+    WHERE id=6;
+    SELECT * FROM teachers;
+    
+    -- Menambah data baru
+    INSERT INTO teachers (first_name, last_name, school, hire_date, salary)
+    VALUES ('Samuel', 'Abbers', 'Standford University', '2006-01-30', 32000),
+           ('Jessica', 'Abbers', 'Standford University', '2005-01-30', 33000),
+           ('Tom', 'Massi', 'Harvard University', '1999-09-09', 39500),
+           ('Esteban', 'Brown', 'MIT', '2007-01-30', 36000),
+           ('Carlos', 'Alonso', 'Standford University', '2001-01-30', 44000);
+           
+    SELECT * FROM teachers;
+    DELETE FROM teachers
+    WHERE id=16 or id= 17 OR id= 18 OR id= 19 OR id= 20
+    
+    -- Melihat isi column first_name, last_name, school
+    SELECT first_name, last_name, school
+    FROM teachers;
+    
+    -- Melihat dosen yang mengajar di MIT
+    SELECT *
+    FROM teachers
+    WHERE school = 'mit'; -- tambahkan kata BINARY di antara WHERE dan school guna kalo kita emang nyari yang emang bener2 huruf yang sesuai setelah sama dengandemo
+    
+    -- Melihat dosen yang memiliki gaji diatas 60000
+    SELECT *
+    FROM teachers 
+    WHERE salary>60000;
+    
+    -- Melihat dosen yang mengajar di MIT dan memiliki gaji diatas 60000
+    SELECT *
+    FROM teachers
+    WHERE school='MIT' AND salary>60000;
+    
+    -- Mencari dosen yang nama belakangnya abbers atau smith
+    -- Cara I: dengan menggunakan OR
+    SELECT *
+    FROM teachers
+    WHERE last_name='abbers' OR last_name='smith';
+    
+    -- Cara 2: dengan menggunakan IN
+    SELECT *
+    FROM teachers
+    WHERE last_name IN ('abbers', 'snith');
+    
+    -- Melihat jumlah data di table teachers
+    SELECT COUNT(*) AS 'jumlah data tabel' -- bagian setelah as adalah memberi komentar
+    FROM teachers;
+    
+    -- Melihat unique value di column school
+    SELECT DISTINCT school -- sama dengan unique
+    FROM teachers;
+    
+    -- Menghitung jumlah uniqeu value di column school
+    SELECT COUNT(DISTINCT(school)) AS 'Jumlah School'
+    FROM teachers;
+    
+    -- Mengurutkan dosen berdasarkan last_name secara Z-A (descending), dan school secara A-Z (ascending)    SELECT *
+    SELECT *
+    FROM teachers
+    ORDER BY last_name DESC, school ASC;
